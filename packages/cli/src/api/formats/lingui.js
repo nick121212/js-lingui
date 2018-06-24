@@ -62,7 +62,7 @@ export default (config: LinguiConfig): CatalogFormat => ({
         const newMessages = R.mapObjIndexed(
           (message, key) => ({
             translation:
-              message.defaults || (config.sourceLocale === locale ? key : ""),
+              config.sourceLocale === locale && !message.defaults ? key : "",
             ...message
           }),
           R.pick(newKeys, nextCatalog)
